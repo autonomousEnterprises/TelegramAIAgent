@@ -439,7 +439,7 @@ class OpenAIHelper:
 
             common_args = {
                 'model': self.config['vision_model'],
-                'messages': self.conversations[chat_id][:-1] + [message, system],
+                'messages': self.conversations[chat_id][:-1] + [system, message],
                 'temperature': self.config['temperature'],
                 'n': 1, # several choices is not implemented yet
                 'max_tokens': self.config['vision_max_tokens'],
