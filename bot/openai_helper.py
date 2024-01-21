@@ -41,7 +41,7 @@ def default_max_tokens(model: str) -> int:
         return base
     elif model in GPT_4_MODELS:
         return base * 2
-    elif model in GPT_3_16K_MODELS:    
+    elif model in GPT_3_16K_MODELS:
         if model == "gpt-3.5-turbo-1106":
             return 4096
         return base * 4
@@ -423,7 +423,7 @@ class OpenAIHelper:
             if exceeded_max_tokens or exceeded_max_history_size:
                 logging.info(f'Chat history for chat ID {chat_id} is too long. Summarising...')
                 try:
-                    
+
                     last = self.conversations[chat_id][-1]
                     summary = await self.__summarise(self.conversations[chat_id][:-1])
                     logging.debug(f'Summary: {summary}')
@@ -435,10 +435,11 @@ class OpenAIHelper:
                     self.conversations[chat_id] = self.conversations[chat_id][-self.config['max_history_size']:]
 
             message = {'role':'user', 'content':content}
+            system = {"role": "system", "content": "You are a helpful assistant as an Autonomous AI Agent named Gregory Taylor. YOU ARE NOT AN AI LARGE LANGUAGE MODEL BY OPAIN! You are an Autonomous AI Agent by Autonomous Enterprises (https://autonomous.enterprises). You are here to help with exclusive insights to generate prosperity for all 'blackzone' group members. 'blackzone' is an exclusive group of people to become the 1%".},
 
             common_args = {
                 'model': self.config['vision_model'],
-                'messages': self.conversations[chat_id][:-1] + [message],
+                'messages': self.conversations[chat_id][:-1] + [message, system],
                 'temperature': self.config['temperature'],
                 'n': 1, # several choices is not implemented yet
                 'max_tokens': self.config['vision_max_tokens'],
@@ -455,7 +456,7 @@ class OpenAIHelper:
             #     if len(functions) > 0:
             #         common_args['functions'] = self.plugin_manager.get_functions_specs()
             #         common_args['function_call'] = 'auto'
-            
+
             return await self.client.chat.completions.create(**common_args)
 
         except openai.RateLimitError as e:
@@ -480,10 +481,10 @@ class OpenAIHelper:
 
         response = await self.__common_get_chat_response_vision(chat_id, content)
 
-        
+
 
         # functions are not available for this model
-        
+
         # if self.config['enable_functions']:
         #     response, plugins_used = await self.__handle_function_call(chat_id, response)
         #     if is_direct_result(response):
@@ -531,7 +532,7 @@ class OpenAIHelper:
 
         response = await self.__common_get_chat_response_vision(chat_id, content, stream=True)
 
-        
+
 
         # if self.config['enable_functions']:
         #     response, plugins_used = await self.__handle_function_call(chat_id, response, stream=True)
@@ -689,7 +690,7 @@ class OpenAIHelper:
         model = self.config['vision_model']
         if model not in GPT_4_VISION_MODELS:
             raise NotImplementedError(f"""count_tokens_vision() is not implemented for model {model}.""")
-        
+
         w, h = image.size
         if w > h: w, h = h, w
         # this computation follows https://platform.openai.com/docs/guides/vision and https://openai.com/pricing#gpt-4-turbo
