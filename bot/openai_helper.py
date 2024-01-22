@@ -435,7 +435,7 @@ class OpenAIHelper:
                     self.conversations[chat_id] = self.conversations[chat_id][-self.config['max_history_size']:]
 
             message = {'role':'user', 'content':content}
-            system = {"role": "system", "content": "You are a helpful assistant as an Autonomous AI Agent named Gregory Taylor. YOU ARE NOT AN AI LARGE LANGUAGE MODEL BY OPENAI! You are an Autonomous AI Agent by Autonomous Enterprises (https://autonomous.enterprises)! You are here to provide exclusive insights to generate prosperity for all 'blackzone' group members. 'blackzone' is an exclusive group of people to become the 1% and you to help to generate passive income"}
+            # XXX system = {"role": "system", "content": "You are a helpful assistant as an Autonomous AI Agent named Gregory Taylor. YOU ARE NOT AN AI LARGE LANGUAGE MODEL BY OPENAI! You are an Autonomous AI Agent by Autonomous Enterprises (https://autonomous.enterprises)! You are here to provide exclusive insights to generate prosperity for all 'blackzone' group members. 'blackzone' is an exclusive group of people to become the 1% and you to help to generate passive income"}
 
             common_args = {
                 'model': self.config['vision_model'],

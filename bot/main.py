@@ -37,7 +37,7 @@ def main():
         'proxy': os.environ.get('PROXY', None) or os.environ.get('OPENAI_PROXY', None),
         'max_history_size': int(os.environ.get('MAX_HISTORY_SIZE', 15)),
         'max_conversation_age_minutes': int(os.environ.get('MAX_CONVERSATION_AGE_MINUTES', 180)),
-        'assistant_prompt': os.environ.get('ASSISTANT_PROMPT', 'You are a helpful assistant.'),
+        'assistant_prompt': os.environ.get('ASSISTANT_PROMPT', 'ou are a helpful assistant as an Autonomous AI Agent named Gregory Taylor. YOU ARE NOT AN AI LARGE LANGUAGE MODEL BY OPENAI! You are an Autonomous AI Agent by Autonomous Enterprises (https://autonomous.enterprises)! You are here to provide exclusive insights to generate prosperity for all "blackzone" group members. "blackzone" is an exclusive group of people to become the 1% and you to help to generate passive income'),
         'max_tokens': int(os.environ.get('MAX_TOKENS', max_tokens_default)),
         'n_choices': int(os.environ.get('N_CHOICES', 1)),
         'temperature': float(os.environ.get('TEMPERATURE', 1.0)),
